@@ -47,7 +47,9 @@
             </plugin>
             <!-- create JAR with dependencies -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -82,7 +84,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>C:/Users/f.barbano/JokerApps/wmod</outputDirectory>
+                            <outputDirectory>${user.home}/JokerApps/wmod</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}</directory>

@@ -38,8 +38,8 @@ public class Main {
 		try {
 			userInput = parseUserInput(args);
 		} catch (InputParserException e) {
-			JkConsole.displayln("%s\n", e.getMessage());
-			JkConsole.displayln(WmodHelp.USAGE);
+			JkConsole.display("%s\n", e.getMessage());
+			JkConsole.display(WmodHelp.USAGE);
 			System.exit(1);
 		}
 
@@ -51,12 +51,12 @@ public class Main {
 
 		// Persist changes
 		if(renameResult.canBeCommitted() && renameResult.isAnyChanged()) {
-			JkConsole.displayln("");
+			JkConsole.display("");
 			String choice = JkConsole.readUserInput("Rename files (y/n)?  ", s -> StringUtils.equalsAnyIgnoreCase(s, "y", "n"));
-			JkConsole.displayln("");
+			JkConsole.display("");
 			if(choice.equalsIgnoreCase("y")) {
 				persistChanges(renameResult);
-				JkConsole.displayln("%d files renamed\n", renameResult.getRenamedPaths().size());
+				JkConsole.display("%d files renamed\n", renameResult.getRenamedPaths().size());
 			}
 		}
 	}
@@ -72,7 +72,7 @@ public class Main {
 		WmodCommand selCmd = userInput.getSelectedCommand();
 
 		if(selCmd == WmodCommand.CMD_HELP) {
-			JkConsole.displayln(WmodHelp.USAGE);
+			JkConsole.display(WmodHelp.USAGE);
 			System.exit(0);
 		}
 
@@ -114,7 +114,7 @@ public class Main {
 		lines.add(String.format("-%s-", sepLine));
 
 		String content = JkStreams.join(lines, "\n");
-		JkConsole.displayln(content);
+		JkConsole.display(content);
 	}
 
 	private static String toString(RenamedPath renamedPath, boolean fourCols) {
