@@ -56,7 +56,8 @@ public class Main {
 			JkConsole.display("");
 			if(choice.equalsIgnoreCase("y")) {
 				persistChanges(renameResult);
-				JkConsole.display("%d files renamed\n", renameResult.getRenamedPaths(RenameStatus.NO_ERROR).size());
+                List<RenamedPath> changedPaths = JkStreams.filter(renameResult.getRenamedPaths(RenameStatus.NO_ERROR), RenamedPath::isChanged);
+                JkConsole.display("%d files renamed\n", changedPaths.size());
 			}
 		}
 	}
