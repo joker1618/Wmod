@@ -1,6 +1,6 @@
 package xxx.joker.apps.wmod.exception;
 
-import xxx.joker.libs.javalibs.exception.JkException;
+import xxx.joker.libs.core.exception.JkException;
 
 /**
  * Created by f.barbano on 12/12/2017.

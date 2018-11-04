@@ -1,6 +1,6 @@
 package xxx.joker.apps.wmod.inputArgs;
 
-import xxx.joker.libs.javalibs.utils.JkStrings;
+import xxx.joker.libs.core.utils.JkStrings;
 
 import java.util.ArrayList;
 import java.util.List;

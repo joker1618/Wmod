@@ -7,9 +7,9 @@ import xxx.joker.apps.wmod.inputArgs.WmodOptions;
 import xxx.joker.apps.wmod.model.RenameResult;
 import xxx.joker.apps.wmod.model.RenameStatus;
 import xxx.joker.apps.wmod.model.RenamedPath;
-import xxx.joker.libs.javalibs.utils.JkFiles;
-import xxx.joker.libs.javalibs.utils.JkStreams;
-import xxx.joker.libs.javalibs.utils.JkStrings;
+import xxx.joker.libs.core.utils.JkFiles;
+import xxx.joker.libs.core.utils.JkStreams;
+import xxx.joker.libs.core.utils.JkStrings;
 
 import java.io.IOException;
 import java.nio.file.Files;

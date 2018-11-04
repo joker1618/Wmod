@@ -13,11 +13,11 @@ import xxx.joker.apps.wmod.service.RenameService;
 import xxx.joker.libs.argsparser.IInputParser;
 import xxx.joker.libs.argsparser.InputParserImpl;
 import xxx.joker.libs.argsparser.exception.InputParserException;
-import xxx.joker.libs.javalibs.format.JkColumnFmtBuilder;
-import xxx.joker.libs.javalibs.utils.JkConsole;
-import xxx.joker.libs.javalibs.utils.JkFiles;
-import xxx.joker.libs.javalibs.utils.JkStreams;
-import xxx.joker.libs.javalibs.utils.JkStrings;
+import xxx.joker.libs.core.format.JkColumnFmtBuilder;
+import xxx.joker.libs.core.utils.JkConsole;
+import xxx.joker.libs.core.utils.JkFiles;
+import xxx.joker.libs.core.utils.JkStreams;
+import xxx.joker.libs.core.utils.JkStrings;
 
 import java.io.IOException;
 import java.nio.file.Path;

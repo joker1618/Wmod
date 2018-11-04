@@ -1,6 +1,6 @@
 package xxx.joker.apps.wmod.model;
 
-import xxx.joker.libs.javalibs.utils.JkStreams;
+import xxx.joker.libs.core.utils.JkStreams;
 
 import java.util.List;
 
