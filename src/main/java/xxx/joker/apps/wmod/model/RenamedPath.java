@@ -1,5 +1,7 @@
 package xxx.joker.apps.wmod.model;
 
+import xxx.joker.libs.core.utils.JkFiles;
+
 import java.nio.file.Path;
 
 /**
@@ -17,7 +19,7 @@ public class RenamedPath {
 	}
 
 	public boolean isChanged() {
-		return !actualPath.equals(newPath);
+		return !actualPath.equals(newPath) || !actualPath.toString().equals(newPath.toString());
 	}
 
 	public Path getActualPath() {
