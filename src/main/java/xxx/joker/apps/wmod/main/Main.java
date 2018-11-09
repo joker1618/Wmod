@@ -20,7 +20,9 @@ import xxx.joker.libs.core.utils.JkStreams;
 import xxx.joker.libs.core.utils.JkStrings;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +57,7 @@ public class Main {
 			String choice = JkConsole.readUserInput("Rename files (y/n)?  ", s -> StringUtils.equalsAnyIgnoreCase(s, "y", "n"));
 			JkConsole.display("");
 			if(choice.equalsIgnoreCase("y")) {
+//				persistChanges2(renameResult);
 				persistChanges(renameResult);
                 List<RenamedPath> changedPaths = JkStreams.filter(renameResult.getRenamedPaths(RenameStatus.NO_ERROR), RenamedPath::isChanged);
                 JkConsole.display("%d files renamed\n", changedPaths.size());
@@ -129,20 +132,20 @@ public class Main {
 		return String.format("%s|%3s|%s%s", act, sep, target, lastSep, err);
 	}
 
-	private static void persistChanges(RenameResult result) throws IOException {
-		// Two phases rename
-		Map<RenamedPath, Path> map = new HashMap<>();
-		long num = System.currentTimeMillis();
-		for(RenamedPath renamedPath : result.getRenamedPaths()) {
-			Path middlePath = JkFiles.computeSafelyPath(".tmp." + num++);
+    private static void persistChanges(RenameResult result) {
+        // Two phases rename
+        Map<RenamedPath, Path> map = new HashMap<>();
+        long num = System.currentTimeMillis();
+        for(RenamedPath renamedPath : result.getRenamedPaths()) {
+            Path middlePath = JkFiles.computeSafelyPath(".tmp." + num++);
 			JkFiles.moveFile(renamedPath.getActualPath(), middlePath, false);
-			map.put(renamedPath, middlePath);
-		}
+            map.put(renamedPath, middlePath);
+        }
 
-		for(Map.Entry<RenamedPath, Path> entry : map.entrySet()) {
-			RenamedPath renamedPath = entry.getKey();
-			Path middlePath = entry.getValue();
+        for(Map.Entry<RenamedPath, Path> entry : map.entrySet()) {
+            RenamedPath renamedPath = entry.getKey();
+            Path middlePath = entry.getValue();
 			JkFiles.moveFile(middlePath, renamedPath.getNewPath(), false);
-		}
-	}
+        }
+    }
 }

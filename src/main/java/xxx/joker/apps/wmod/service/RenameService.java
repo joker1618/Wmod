@@ -144,9 +144,7 @@ public class RenameService {
 	}
 
 	private RenamedPath normalizeFileName(Path actual, boolean onlyFirstWord, int offset) {
-		String extension = JkFiles.getExtension(actual);
-		String format = Pattern.quote("." + extension) + "$";
-		String actualName = actual.getFileName().toString().replaceAll(format, "");
+		String actualName = Files.isDirectory(actual) ? actual.getFileName().toString() : JkFiles.getFileName(actual);
 		Path renamed;
 		RenameStatus status = RenameStatus.NO_ERROR;
 
@@ -182,7 +180,12 @@ public class RenameService {
 				sb.append(str);
 			}
 
-			renamed = actual.getParent().resolve(sb.toString() + "." + extension);
+			String fname = sb.toString();
+			if(!Files.isDirectory(actual) && actual.getFileName().toString().contains(".")) {
+                fname += "." + JkFiles.getExtension(actual);
+            }
+            renamed = JkFiles.getParent(actual).resolve(fname);
+
 			if(StringUtils.isBlank(sb.toString())) {
 				status = RenameStatus.NEW_NAME_BLANK;
 			}
@@ -427,13 +430,15 @@ public class RenameService {
 	}
 
 	private RenamedPath setNewFilename(Path actual, String newName, int offset) throws WmodException {
-		String actualName = actual.getFileName().toString();
+        String actualName = actual.getFileName().toString();
 		if(actualName.length() < offset) {
 			throw new WmodException("The filename length of %s is less than offset (%d)", actual, offset);
 		}
 
-		String extension = JkFiles.getExtension(actual);
-		String newFn = String.format("%s%s.%s", actual.getFileName().toString().substring(0, offset), newName, extension);
+        String newFn = String.format("%s%s", actualName.substring(0, offset), newName);
+		if(!Files.isDirectory(actual) && actualName.contains(".")) {
+		    newFn += "." + JkFiles.getExtension(actual);
+        }
 		Path renamed = actual.getParent().resolve(newFn);
 
 		RenameStatus status = StringUtils.isBlank(newFn) ? RenameStatus.NEW_NAME_BLANK : RenameStatus.NO_ERROR;
