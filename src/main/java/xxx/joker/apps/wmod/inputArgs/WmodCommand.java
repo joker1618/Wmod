@@ -29,6 +29,7 @@ public enum WmodCommand implements InputCommand {
 		),
 		new CmdParam(false, new CmdOption(IGNORE_CASE)),
 		new CmdParam(false, new CmdOption(INSERT)),
+		new CmdParam(false, new CmdOption(DEBUG)),
 		new CmdParam(new CmdOption(FILE_PATHS, ArgsParse.windowsPathFormat(), ArgsParse.distinctPath(true), ArgsCheck.pathExists(), ArgsCheck.pathsParentEquals()))
 	),
 
@@ -43,6 +44,7 @@ public enum WmodCommand implements InputCommand {
 			new CmdOption(POSITIONS, null, null, ArgsParse.orderDistinctInt(true), ArgsCheck.intGE(0))
 		),
 		new CmdParam(false, new CmdOption(IGNORE_CASE)),
+		new CmdParam(false, new CmdOption(DEBUG)),
 		new CmdParam(new CmdOption(FILE_PATHS, ArgsParse.windowsPathFormat(), ArgsParse.distinctPath(true), ArgsCheck.pathExists(), ArgsCheck.pathsParentEquals()))
 	),
 
@@ -51,6 +53,7 @@ public enum WmodCommand implements InputCommand {
 		new CmdParam(new CmdOption(INSERT)),
 		new CmdParam(new CmdOption(POSITIONS, null, null, ArgsParse.orderDistinctInt(true), ArgsCheck.intGE(0))),
 		new CmdParam(false, new CmdOption(IGNORE_CASE)),
+		new CmdParam(false, new CmdOption(DEBUG)),
 		new CmdParam(new CmdOption(FILE_PATHS, ArgsParse.windowsPathFormat(), ArgsParse.distinctPath(true), ArgsCheck.pathExists(), ArgsCheck.pathsParentEquals()))
 	),
 
@@ -60,6 +63,7 @@ public enum WmodCommand implements InputCommand {
 		new CmdParam(new CmdOption(START)),
 		new CmdParam(false, new CmdOption(STEP, ArgsCheck.intNE(0))),
 		new CmdParam(false, new CmdOption(DIGIT, ArgsCheck.intGE(1))),
+		new CmdParam(false, new CmdOption(DEBUG)),
 		new CmdParam(new CmdOption(FILE_PATHS, ArgsParse.windowsPathFormat(), ArgsParse.distinctPath(true), ArgsCheck.pathExists(), ArgsCheck.pathsParentEquals()))
 	),
 
@@ -68,6 +72,7 @@ public enum WmodCommand implements InputCommand {
 		new CmdParam(new CmdOption(NORMALIZE)),
 		new CmdParam(new CmdOption(FIRST), new CmdOption(ALL)),
 		new CmdParam(false, new CmdOption(OFFSET, ArgsCheck.intGE(0))),
+		new CmdParam(false, new CmdOption(DEBUG)),
 		new CmdParam(new CmdOption(FILE_PATHS, ArgsParse.windowsPathFormat(), ArgsParse.distinctPath(true), ArgsCheck.pathExists(), ArgsCheck.pathsParentEquals()))
 	),
 
@@ -75,11 +80,15 @@ public enum WmodCommand implements InputCommand {
 	CMD_NAMES_FROM_FILE(
 		new CmdParam(new CmdOption(NAMES_FROM_FILE, ArgsParse.windowsPathFormat(), ArgsCheck.pathIsFile())),
 		new CmdParam(false, new CmdOption(OFFSET, ArgsCheck.intGE(0))),
+		new CmdParam(false, new CmdOption(DEBUG)),
 		new CmdParam(new CmdOption(FILE_PATHS, ArgsParse.windowsPathFormat(), ArgsParse.distinctPath(true), ArgsCheck.pathExists(), ArgsCheck.pathsParentEquals()))
 	),
 
 	@Cmd
-	CMD_HELP(new CmdParam(false, new CmdOption(HELP)))
+	CMD_HELP(
+		new CmdParam(false, new CmdOption(HELP)),
+		new CmdParam(false, new CmdOption(DEBUG))
+	)
 
 	;
 

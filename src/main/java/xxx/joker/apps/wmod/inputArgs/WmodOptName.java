@@ -50,6 +50,8 @@ public enum WmodOptName implements OptionName {
 	@OptName
 	FILE_PATHS("-f"),
 	@OptName
+	DEBUG("-debug"),
+	@OptName
 	HELP("-h"),
 
 	;

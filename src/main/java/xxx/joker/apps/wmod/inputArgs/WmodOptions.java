@@ -52,9 +52,15 @@ public class WmodOptions extends InputOption<WmodCommand> {
 	private Path[] filePaths;
 	@Opt(name = "-h", aliases = {"--help"})
 	private Boolean help = false;
+	@Opt(name = "-debug")
+	private Boolean debug = false;
 
 	public Boolean isDelete() {
 		return delete;
+	}
+
+	public Boolean isDebug() {
+		return debug;
 	}
 
 	public Boolean isLower() {

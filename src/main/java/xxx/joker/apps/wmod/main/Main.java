@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static xxx.joker.libs.core.utils.JkConsole.display;
+
 /**
  * Created by f.barbano on 12/12/2017.
  */
@@ -40,28 +42,34 @@ public class Main {
 		try {
 			userInput = parseUserInput(args);
 		} catch (InputParserException e) {
-			JkConsole.display("%s\n", e.getMessage());
-			JkConsole.display(WmodHelp.USAGE);
+			display("%s\n", e.getMessage());
+			display(WmodHelp.USAGE);
 			System.exit(1);
 		}
 
-		// Perform operation
-		RenameResult renameResult = performOperation(userInput);
+		try {
+			// Perform operation
+			RenameResult renameResult = performOperation(userInput);
 
-		// Display results
-		displayRenameResult(renameResult);
+			// Display results
+			displayRenameResult(renameResult);
 
-		// Persist changes
-		if(renameResult.canBeCommitted() && renameResult.isAnyChanged()) {
-			JkConsole.display("");
-			String choice = JkConsole.readUserInput("Rename files (y/n)?  ", s -> StringUtils.equalsAnyIgnoreCase(s, "y", "n"));
-			JkConsole.display("");
-			if(choice.equalsIgnoreCase("y")) {
-//				persistChanges2(renameResult);
-				persistChanges(renameResult);
-                List<RenamedPath> changedPaths = JkStreams.filter(renameResult.getRenamedPaths(RenameStatus.NO_ERROR), RenamedPath::isChanged);
-                JkConsole.display("%d files renamed\n", changedPaths.size());
+			// Persist changes
+			if (renameResult.canBeCommitted() && renameResult.isAnyChanged()) {
+				display("");
+				String choice = JkConsole.readUserInput("Rename files (y/n)?  ", s -> StringUtils.equalsAnyIgnoreCase(s, "y", "n"));
+				display("");
+				if (choice.equalsIgnoreCase("y")) {
+					persistChanges(renameResult);
+					List<RenamedPath> changedPaths = JkStreams.filter(renameResult.getRenamedPaths(RenameStatus.NO_ERROR), RenamedPath::isChanged);
+					display("%d files renamed\n", changedPaths.size());
+				}
 			}
+
+		} catch(Exception e) {
+			display("%s", e.getMessage());
+			if(userInput.isDebug()) 	display("%s", e);
+			System.exit(2);
 		}
 	}
 
@@ -76,7 +84,7 @@ public class Main {
 		WmodCommand selCmd = userInput.getSelectedCommand();
 
 		if(selCmd == WmodCommand.CMD_HELP) {
-			JkConsole.display(WmodHelp.USAGE);
+			display(WmodHelp.USAGE);
 			System.exit(0);
 		}
 
@@ -118,7 +126,7 @@ public class Main {
 		lines.add(String.format("-%s-", sepLine));
 
 		String content = JkStreams.join(lines, "\n");
-		JkConsole.display(content);
+		display(content);
 	}
 
 	private static String toString(RenamedPath renamedPath, boolean fourCols) {
