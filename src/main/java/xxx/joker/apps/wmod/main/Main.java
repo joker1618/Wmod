@@ -74,10 +74,8 @@ public class Main {
 	}
 
 	private static WmodOptions parseUserInput(String[] args) throws InputParserException {
-		WmodOptions userInput = new WmodOptions();
-		IInputParser parser = new InputParserImpl(userInput, WmodOptName.class, WmodCommand.class, JkFiles.getLauncherPath(Main.class));
-		parser.parse(args);
-		return userInput;
+		IInputParser parser = new InputParserImpl(WmodOptions.class, WmodOptName.class, WmodCommand.class, JkFiles.getLauncherPath(Main.class));
+		return parser.parse(args);
 	}
 
 	private static RenameResult performOperation(WmodOptions userInput) throws WmodException {
