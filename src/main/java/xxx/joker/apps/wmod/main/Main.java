@@ -74,7 +74,7 @@ public class Main {
 	}
 
 	private static WmodOptions parseUserInput(String[] args) throws InputParserException {
-		IInputParser parser = new InputParserImpl(WmodOptions.class, WmodOptName.class, WmodCommand.class, JkFiles.getLauncherPath(Main.class));
+		IInputParser parser = new InputParserImpl(WmodOptions.class, WmodOptName.class, WmodCommand.class);
 		return parser.parse(args);
 	}
 
