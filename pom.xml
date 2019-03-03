@@ -86,7 +86,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${user.home}/JokerApps/wmod</outputDirectory>
+			    <outputDirectory>${joker.apps.folder}/wmod</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}</directory>
